@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Facilitation Correction</title>
+</head>
+<body onkeydown="handleKeyPress(event)">
+    <div class="video-container">
+        <video id="myVideo" width="640" height="360" controls>
+            <!-- <source src="{% static 'video.mp4' %}" type="video/mp4"> -->
+            <source src="../../static/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        var video = document.getElementById("myVideo");
+
+        function handleKeyPress(event) {
+            switch (event.code) {
+                case "Space":
+                    event.preventDefault();
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                    break;
+                case "ArrowLeft":
+                    event.preventDefault();
+                    console.log("Durée totale de la vidéo : ", video.duration);
+                    console.log("Temps actuel avant rembobinage : ", video.currentTime);
+                    video.currentTime = Math.max(0, video.currentTime - 3);
+                    console.log("Temps actuel après rembobinage : ", video.currentTime);
+                    break;
+                case "ArrowRight":
+                    event.preventDefault();
+                    console.log("Durée totale de la vidéo : ", video.duration);
+                    console.log("Temps actuel avant l'avancement : ", video.currentTime);
+                    video.currentTime = Math.max(0, video.currentTime + 3);
+                    console.log("Temps actuel après l'avancement : ", video.currentTime);
+                    break;
+            }
+        }
+    </script>  
+    
+</body>
+</html>
